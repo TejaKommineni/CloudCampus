@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Dec 08, 2017 at 11:41 PM
+-- Generation Time: Dec 08, 2017 at 11:46 PM
 -- Server version: 5.7.19
 -- PHP Version: 5.6.31
 
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `class`;
 CREATE TABLE IF NOT EXISTS `class` (
-  `Id` int(5) NOT NULL,
+  `Id` int(5) NOT NULL AUTO_INCREMENT,
   `Code` varchar(20) NOT NULL,
   `Name` varchar(20) NOT NULL,
   `Description` varchar(200) NOT NULL,
@@ -95,22 +95,6 @@ CREATE TABLE IF NOT EXISTS `videos` (
   PRIMARY KEY (`Id`),
   KEY `ClassID_in_Class_Table` (`ClassId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `enroll`
---
-ALTER TABLE `enroll`
-  ADD CONSTRAINT `Class_in_Class_Table` FOREIGN KEY (`ClassId`) REFERENCES `class` (`Id`);
-
---
--- Constraints for table `videos`
---
-ALTER TABLE `videos`
-  ADD CONSTRAINT `ClassID_in_Class_Table` FOREIGN KEY (`ClassId`) REFERENCES `class` (`Id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
