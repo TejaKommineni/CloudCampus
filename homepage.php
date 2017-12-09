@@ -39,6 +39,8 @@ include('session.php');
 	  <li><a href="#">Customer Profile</a></li>
 	  <li><a href="viewgiftcard.php">Enroll Class</a></li>
       <li><a href="viewaccount.php">View Enrolled Classes</a></li>
+      <li><a href="askquestions.php">Ask Questions</a></li>
+      <li><a href="answerquestions.php">Answer Questions</a></li>
       <?php
         if($login_session != 'Professor')
         {
@@ -46,8 +48,11 @@ include('session.php');
         }
       ?>
 
-	  <li><a href="redeem.php">Redeem</a></li>
-	</ul>
+          <li class="dropdown"><a href="#"><span class="glyphicon glyphicon-bell"></span> Notifications</a>
+          <li>
+
+
+      </ul>
 	<ul class="nav navbar-nav navbar-right">
       <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
     </ul>
