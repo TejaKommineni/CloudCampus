@@ -28,6 +28,11 @@ if ($res = $mysqli->query("select * from login where Username='$login_session'")
     $id = $row1->Id;
 
 }
+
+$query = "UPDATE notifications set Videos = 0 where UserId = '$id'";
+$result = mysqli_query($mysqli, $query);
+
+
 // get the records from the database
 if ($result = $mysqli->query("SELECT * FROM enroll WHERE UserId = '$id'"))
 {

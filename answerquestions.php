@@ -49,6 +49,11 @@ if ($res = $mysqli->query("select * from login where Username='$login_session'")
     $id = $row1->Id;
 
 }
+
+$query = "UPDATE notifications set Questions = 0 where UserId = '$id'";
+$result = mysqli_query($mysqli, $query);
+
+
 // get the records from the database
 if ($result = $mysqli->query("SELECT * FROM class WHERE Professor = '$id'"))
 {
@@ -112,7 +117,7 @@ if ($result = $mysqli->query("SELECT * FROM class WHERE Professor = '$id'"))
                         echo "<label for=\"answer\">Answer:</label>";
                         echo "<textarea class=\"form-control\" rows=\"3\" name='answer' id=\"answer\" placeholder='Answer this question' required>" . $question_row->Answer . "</textarea>";
                         echo "<input type='hidden' name='selectedClass' id='selectedClass' value='$classId'>";
-                        echo "<input type='hidden' name='userId' id='userId' value='$id'>";
+                        echo "<input type='hidden' name='userId' id='userId' value='$question_row->UserId'>";
                         echo "<input type='hidden' name='questionId' id='questionId' value='$question_row->Id'>";
                         echo "<br>";
                         echo "<button type='submit' class='btn btn-info'>Post Answer</button>";

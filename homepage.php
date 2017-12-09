@@ -47,34 +47,87 @@ include('session.php');
 	</ul>
         <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-bell"></span> Notifications (<b>2</b>)</a>
-                <ul class="dropdown-menu notify-drop" id="notification-li">
-                    <div class="notify-drop-title">
-                        <div class="row">
-                            <div class="col-md-6 col-sm-6 col-xs-6">Bildirimler (<b>2</b>)</div>
-                            <div class="col-md-6 col-sm-6 col-xs-6 text-right"><a href="" class="rIcon allRead" data-tooltip="tooltip" data-placement="bottom" title="tümü okundu."><i class="fa fa-dot-circle-o"></i></a></div>
-                        </div>
-                    </div>
-                    <!-- end notify title -->
-                    <!-- notify content -->
-                    <div class="drop-content">
-                        <li>
-                            <div class="col-md-3 col-sm-3 col-xs-3"><div class="notify-img"><img src="http://placehold.it/45x45" alt=""></div></div>
-                            <div class="col-md-9 col-sm-9 col-xs-9 pd-l0"><a href="">Ahmet</a> yorumladı. <a href="">Çicek bahçeleri...</a> <a href="" class="rIcon"><i class="fa fa-dot-circle-o"></i></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-bell"></span> Notifications (<b>
 
-                                <hr>
-                                <p class="time">Şimdi</p>
-                            </div>
-                        </li>
+                        <?php
+                        $ses_sql=mysqli_query($mysqli,"select * from notifications where UserId = '$login_id'");
+                        $row = mysqli_fetch_assoc($ses_sql);
+                        echo $row['Videos']+$row['Questions']+$row['Answers'];
+                        echo "</b>)";
+                        echo "</a>";
+                        echo "<ul class=\"dropdown-menu notify-drop\" id=\"notification-li\">";
+                        if($login_role == 'Student' && $row['Videos'] != 0) {
+
+                            echo "<div class=\"notify-drop-title\">";
+                            echo "<div class=\"row\">";
+                            echo "<div class=\"col-md-6 col-sm-6 col-xs-6\" ><p class='text-info'>Videos (<b>" . $row['Videos'] . "</b>)</p>";
+                            echo " </div>";
+                            echo "<div class=\"col-md-6 col-sm-6 col-xs-6 text-right\"><a href=\"\" class=\"rIcon allRead\" data-tooltip=\"tooltip\" data-placement=\"bottom\" title=\"tümü okundu.\"><i class=\"fa fa-dot-circle-o\"></i></a></div>";
+                            echo "</div>";
+                            echo "</div>";
+                            echo "<div class=\"drop-content\">";
+                            echo "<li>";
+                            echo "<div class=\"col-md-3 col-sm-3 col-xs-3\"><span class=\"glyphicon glyphicon-camera\"></span></div>";
+                            echo "<div class=\"col-md-9 col-sm-9 col-xs-9 pd-l0\">";
+                            echo "<p class='text-info'>You have " . $row['Videos'] . " Videos posted. View them in your View Enrolled Classes section.</p>";
+                            echo "<hr>";
+                            echo "<p class=\"time\">";
+                            echo "</p>";
+                            echo "</div>";
+                            echo " </li>";
+                            echo "</div>";
+
+                        }
+                        if($login_role == 'Professor' && $row['Questions'] != 0) {
+                            echo "<div class=\"notify-drop-title\">";
+                            echo "<div class=\"row\">";
+                            echo "<div class=\"col-md-6 col-sm-6 col-xs-6\"><p class='text-info'>Questions (<b>" . $row['Questions'] . "</b>)</p>";
+                            echo " </div>";
+                            echo "<div class=\"col-md-6 col-sm-6 col-xs-6 text-right\"><a href=\"\" class=\"rIcon allRead\" data-tooltip=\"tooltip\" data-placement=\"bottom\" title=\"tümü okundu.\"><i class=\"fa fa-dot-circle-o\"></i></a></div>";
+                            echo "</div>";
+                            echo "</div>";
+                            echo "<div class=\"drop-content\">";
+                            echo "<li>";
+                            echo "<div class=\"col-md-3 col-sm-3 col-xs-3\"><span class=\"glyphicon glyphicon-question-sign\"></span></div>";
+                            echo "<div class=\"col-md-9 col-sm-9 col-xs-9 pd-l0\">";
+                            echo "<p class='text-info' >You have " . $row['Questions'] . " Question posted by students. View them in your Answer Questions section.</>";
+                            echo "<hr>";
+                            echo "<p class=\"time\">";
+                            echo "</p>";
+                            echo "</div>";
+                            echo " </li>";
+                            echo "</div>";
+                        }
+
+                        if($login_role == 'Student' && $row['Answers'] != 0) {
 
 
+                            echo "<div class=\"notify-drop-title\">";
+                            echo "<div class=\"row\">";
+                            echo "<div class=\"col-md-6 col-sm-6 col-xs-6\">Answers <p class='text-info'>(<b>" . $row['Answers'] . "</b>)</p>";
+                            echo " </div>";
+                            echo "<div class=\"col-md-6 col-sm-6 col-xs-6 text-right\"><a href=\"\" class=\"rIcon allRead\" data-tooltip=\"tooltip\" data-placement=\"bottom\" title=\"tümü okundu.\"><i class=\"fa fa-dot-circle-o\"></i></a></div>";
+                            echo "</div>";
+                            echo "</div>";
+                            echo "<div class=\"drop-content\">";
+                            echo "<li>";
+                            echo "<div class=\"col-md-3 col-sm-3 col-xs-3\"><span class=\"glyphicon glyphicon-pencil\"></span></div>";
+                            echo "<div class=\"col-md-9 col-sm-9 col-xs-9 pd-l0\">";
+                            echo "<p class='text-info'>You have " . $row['Answers'] . " questions answered by your professors. View them in your Ask Questions section.</p>";
+                            echo "<hr>";
+                            echo "<p class=\"time\">";
+                            echo "</p>";
+                            echo "</div>";
+                            echo " </li>";
+                            echo "</div>";
 
-                    </div>
-                    <div class="notify-drop-footer text-center">
-                        <a href=""><i class="fa fa-eye"></i> Tümünü Göster</a>
-                    </div>
-                </ul>
-            </li>
+                        }
+
+                        echo "</ul>";
+
+                        ?>
+                    </li>
+
             <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> &nbsp;Logout</a></li>
         </ul>
     </div>

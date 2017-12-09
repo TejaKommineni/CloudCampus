@@ -23,6 +23,7 @@
 // connect to the database
 include_once('homepage.php');
 require_once('connect-db.php');
+
 if (empty($_POST['question'])) {
 
 }
@@ -49,6 +50,10 @@ if ($res = $mysqli->query("select * from login where Username='$login_session'")
     $id = $row1->Id;
 
 }
+
+$query = "UPDATE notifications set Answers = 0 where UserId = '$id'";
+$result = mysqli_query($mysqli, $query);
+
 // get the records from the database
 if ($result = $mysqli->query("SELECT * FROM enroll WHERE UserId = '$id'"))
 {

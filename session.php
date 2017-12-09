@@ -10,6 +10,7 @@ $user_check=$_SESSION['login_user'];
 $ses_sql=mysqli_query($mysqli,"select * from login where Username='$user_check'");
 $row = mysqli_fetch_assoc($ses_sql);
 $login_session =$row['Username'];
+$login_id =$row['Id'];
 $login_role = $row['Role'];
 if(!isset($login_session)){
 mysqli_close($mysqli); // Closing Connection
