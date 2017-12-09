@@ -54,14 +54,28 @@ if ($result = $mysqli->query("SELECT * FROM enroll WHERE UserId = '$id'"))
         while ($row = $result->fetch_object()) {
             $class = $mysqli->query("select * from class where Id='$row->ClassId'");
             $class_row = $class->fetch_object();
-            echo "<option>". $class_row-> Name ."</option>";
+            if (empty($_POST['selectedClass'])) {
+                echo "<option value = ".$row->ClassId.">". $class_row-> Name ."</option>";
+            }
+            else
+            {
+                $classId = $_POST['selectedClass'];
+                if ($classId == $row->ClassId){
+                    echo "<option selected value = ".$row->ClassId.">". $class_row-> Name ."</option>";
+                }
+                else{
+                    echo "<option value = ".$row->ClassId.">". $class_row-> Name ."</option>";
+                }
+
+            }
         }
         echo "</select>";
         echo "</div>";
         echo "</div>";
         echo "<button type='submit' class='btn btn-default'>Submit</button>";
-       echo "</form>";
+        echo "</form>";
         echo "</br>";
+
 
         if (empty($_POST['selectedClass']) ) {
 
@@ -73,7 +87,7 @@ if ($result = $mysqli->query("SELECT * FROM enroll WHERE UserId = '$id'"))
             $classId = $_POST['selectedClass'];
             $videos = $mysqli->query("select * from videos where ClassId='$classId'");
             if ($videos->num_rows > 0) {
-                while ($video_row = $result->fetch_object()) {
+                while ($video_row = $videos->fetch_object()) {
 
                     echo "<tr>";
                     echo "<td>" . $video_row->Topic . "</td>";

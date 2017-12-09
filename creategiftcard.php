@@ -23,53 +23,22 @@
 // connect to the database
 include_once('homepage.php');
 require_once('connect-db.php');
-if (empty($_POST['id']) || empty($_POST['classid'])) {
+if (empty($_POST['topic']) && empty($_POST['url'])) {
 
 }
 else
 {
-    $id = $_POST['id'];
-    $classid = $_POST['classid'];
-    $type = $_POST['type'];
-    if($type == 'enroll'){
-        $query = "select * from enroll where UserId = '$id' and ClassId = '$classid'";
-        $result = mysqli_query($mysqli, $query);
-        if($result->num_rows > 0)
-        {
-            $fmsg = "You are already enrolled in the class";
-        }
-        else
-        {
-            $query = "INSERT INTO enroll(UserId, ClassId) VALUES ('$id','$classid')";
-            $result = mysqli_query($mysqli, $query);
-            if($result){
-                $smsg = "Class Enrollment is Successful.";
-            }else{
-                $fmsg = "Class Enrollment Failed.";
-            }
-
-
-        }
+    $topic = $_POST['topic'];
+    $url = $_POST['url'];
+    $classId = $_POST['selectedClass'];
+    $query = "INSERT INTO videos(ClassId, Links,Topic) VALUES ('$classId','$url','$topic')";
+    $result = mysqli_query($mysqli, $query);
+    if($result){
+        $smsg = "Class Video URL added succesfully.";
+    }else{
+        $fmsg = "Failure while adding the Class Streaming URL.";
     }
-    else{
-        $query = "select * from enroll where UserId = '$id' and ClassId = '$classid'";
-        $result = mysqli_query($mysqli, $query);
-        if($result->num_rows == 0)
-        {
-            $fmsg = "You are trying to drop from an unenrolled class";
-        }
-        else
-        {
-            $query = "DELETE FROM enroll WHERE UserId= '$id' and ClassId = '$classid' ";
-            $result = mysqli_query($mysqli, $query);
-            if($result){
-                $smsg = "You are Dropped from the class.";
-            }else{
-                $fmsg = "Dropping of class Failed.";
-            }
-        }
 
-    }
 
 }
 if ($res = $mysqli->query("select * from login where Username='$login_session'")){
@@ -95,7 +64,7 @@ if ($result = $mysqli->query("SELECT * FROM enroll WHERE UserId = '$id'"))
         _END;*/
 
         echo "</br>";
-        echo "<form method='post' action='viewaccount.php' id=\"viewEnrolledClassForm\">";
+        echo "<form method='post' action='creategiftcard.php' id=\"viewEnrolledClassForm\">";
         echo " <div class='form-group'>";
         echo "<label for='enrolledclass'>Select an Enrolled Class</label>";
         echo "<div class=\"form-group\" name=\"classId\" id=\"classId\" class=\"form-control\" required>";
@@ -103,7 +72,20 @@ if ($result = $mysqli->query("SELECT * FROM enroll WHERE UserId = '$id'"))
         while ($row = $result->fetch_object()) {
             $class = $mysqli->query("select * from class where Id='$row->ClassId'");
             $class_row = $class->fetch_object();
-            echo "<option>". $class_row-> Name ."</option>";
+            if (empty($_POST['selectedClass'])) {
+                echo "<option value = ".$row->ClassId.">". $class_row-> Name ."</option>";
+            }
+            else
+            {
+                $classId = $_POST['selectedClass'];
+                if ($classId == $row->ClassId){
+                    echo "<option selected value = ".$row->ClassId.">". $class_row-> Name ."</option>";
+                }
+                else{
+                    echo "<option value = ".$row->ClassId.">". $class_row-> Name ."</option>";
+                }
+
+            }
         }
         echo "</select>";
         echo "</div>";
@@ -122,7 +104,7 @@ if ($result = $mysqli->query("SELECT * FROM enroll WHERE UserId = '$id'"))
             $classId = $_POST['selectedClass'];
             $videos = $mysqli->query("select * from videos where ClassId='$classId'");
             if ($videos->num_rows > 0) {
-                while ($video_row = $result->fetch_object()) {
+                while ($video_row = $videos->fetch_object()) {
                     echo "<tr>";
                     echo "<td>" . $video_row->Topic . "</td>";
                     echo "<td>" . $video_row->Links . "</td>";
@@ -130,11 +112,20 @@ if ($result = $mysqli->query("SELECT * FROM enroll WHERE UserId = '$id'"))
                     echo "</tr>";
                 }
                 echo "<tr>";
-                echo "<td> <input type=\"text\" name=\"topic\" id=\"topic\" tabindex=\"1\" class=\"form-control\" placeholder=\"topic\" value=\"\" required></td>";
-                echo "<td> <input type=\"text\" name=\"url\" id=\"url\" tabindex=\"1\" class=\"form-control\" placeholder=\"URL\" value=\"\" required></td>";
-                echo "</td>";
+                echo "<form method='post' action='creategiftcard.php' id=\"viewEnrolledClassForm\">";
+                echo " <div class='form-group'>";
+                echo "<td> <input type=\"text\" name=\"topic\" id=\"topic\" tabindex=\"1\" class=\"form-control\" placeholder=\"Add Topic\" value=\"\" required></td>";
+                echo "<td> <input type=\"text\" name=\"url\" id=\"url\" tabindex=\"1\" class=\"form-control\" placeholder=\"Add URL\" value=\"\" required></td>";
+                echo "</div>";
                 echo "</tr>";
                 echo "</tbody>";
+                echo "<tr>";
+                echo "<td colspan='2'>";
+
+                echo "<button type='submit' class='btn btn-default'>Add Streaming URL</button>";
+                echo "</td>";
+                echo "</tr>";
+                echo "</form>";
                 echo "</table>";
                 echo "</br></br>";
                 echo "</div>";
@@ -143,12 +134,22 @@ if ($result = $mysqli->query("SELECT * FROM enroll WHERE UserId = '$id'"))
             }
             else
             {
+
                 echo "<tr>";
-                echo "<td> <input type=\"text\" name=\"topic\" id=\"topic\" tabindex=\"1\" class=\"form-control\" placeholder=\"topic\" value=\"\" required></td>";
-                echo "<td> <input type=\"text\" name=\"url\" id=\"url\" tabindex=\"1\" class=\"form-control\" placeholder=\"URL\" value=\"\" required></td>";
-                echo "</td>";
+                echo "<form method='post' action='creategiftcard.php' id=\"viewEnrolledClassForm\">";
+                echo " <div class='form-group'>";
+                echo "<td> <input type=\"text\" name=\"topic\" id=\"topic\" tabindex=\"1\" class=\"form-control\" placeholder=\"Add Topic\" value=\"\" required></td>";
+                echo "<td> <input type=\"text\" name=\"url\" id=\"url\" tabindex=\"1\" class=\"form-control\" placeholder=\"Add URL\" value=\"\" required></td>";
+                echo "</div>";
                 echo "</tr>";
                 echo "</tbody>";
+                echo "<tr>";
+                echo "<td colspan='2'>";
+                echo "<input type='hidden' name='selectedClass' id='selectedClass' value='$classId'>";
+                echo "<button type='submit' class='btn btn-default'>Add Streaming URL</button>";
+                echo "</td>";
+                echo "</tr>";
+                echo "</form>";
                 echo "</table>";
                 echo "</br></br>";
 
@@ -184,5 +185,50 @@ else
 $mysqli->close();
 
 ?>
+
+<?php if(isset($smsg)){ ?>
+    <div class="modal show" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Confirmation</h4>
+                </div>
+                <div class="modal-body">
+                    <p class ="text-success" ><?php echo $smsg; ?></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="closeModal()">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+<?php } ?>
+<?php if(isset($fmsg)){ ?>
+
+    <div class="modal show" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Confirmation</h4>
+                </div>
+                <div class="modal-body">
+                    <p class = "text-danger"><?php echo $fmsg; ?></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="closeModal()">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+<?php } ?>
 </body>
 </html>
