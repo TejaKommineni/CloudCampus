@@ -56,6 +56,10 @@ header("location: homepage.php");
         echo '</script>';
         if($result){
             $smsg = "User Created Successfully.";
+            $user = $mysqli->query("select * from login where Email='$email'");
+            $user_row = $user->fetch_object();
+            $query = "INSERT INTO notifications(UserId) VALUES ('$user_row->Id' )";
+            $result = mysqli_query($mysqli, $query);
         }else{
             $fmsg = "Username or Email Id already taken. User Registration Failed";
         }
@@ -170,8 +174,8 @@ header("location: homepage.php");
 									<div class="form-group">
 										<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password" required>
 									</div>
-                                    <div class="form-group" name="role" id="role" class="form-control" required>
-                                        <select class="form-control">
+                                    <div class="form-group"  class="form-control" required>
+                                        <select class="form-control" name="role" id="role">
                                             <option>Student</option>
                                             <option>Professor</option>
                                         </select>

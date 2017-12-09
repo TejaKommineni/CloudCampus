@@ -35,6 +35,14 @@ else
     $result = mysqli_query($mysqli, $query);
     if($result){
         $smsg = "Class Video URL added succesfully.";
+        if ($res = $mysqli->query("SELECT * FROM enroll WHERE ClassId = '$classId'")) {
+            // display records if there are records to display
+            if ($res->num_rows > 0) {
+                while ($row = $res->fetch_object()) {
+                    $class = $mysqli->query("update notifications set Videos = Videos +1 where UserId = '$row->UserId'");
+                }
+            }
+        }
     }else{
         $fmsg = "Failure while adding the Class Streaming URL.";
     }
@@ -47,7 +55,7 @@ if ($res = $mysqli->query("select * from login where Username='$login_session'")
 
 }
 // get the records from the database
-if ($result = $mysqli->query("SELECT * FROM enroll WHERE UserId = '$id'"))
+if ($result = $mysqli->query("SELECT * FROM class WHERE Professor  = '$id'"))
 {
 // display records if there are records to display
     if ($result->num_rows > 0)
@@ -66,23 +74,21 @@ if ($result = $mysqli->query("SELECT * FROM enroll WHERE UserId = '$id'"))
         echo "</br>";
         echo "<form method='post' action='creategiftcard.php' id=\"viewEnrolledClassForm\">";
         echo " <div class='form-group'>";
-        echo "<label for='enrolledclass'>Select an Enrolled Class</label>";
+        echo "<label for='enrolledclass'>Select a Class</label>";
         echo "<div class=\"form-group\" name=\"classId\" id=\"classId\" class=\"form-control\" required>";
         echo "<select id='selectedClass', name='selectedClass', class=\"form-control\">";
         while ($row = $result->fetch_object()) {
-            $class = $mysqli->query("select * from class where Id='$row->ClassId'");
-            $class_row = $class->fetch_object();
             if (empty($_POST['selectedClass'])) {
-                echo "<option value = ".$row->ClassId.">". $class_row-> Name ."</option>";
+                echo "<option value = ".$row->Id.">". $row-> Name ."</option>";
             }
             else
             {
                 $classId = $_POST['selectedClass'];
-                if ($classId == $row->ClassId){
-                    echo "<option selected value = ".$row->ClassId.">". $class_row-> Name ."</option>";
+                if ($classId == $row->Id){
+                    echo "<option selected value = ".$row->Id.">". $row-> Name ."</option>";
                 }
                 else{
-                    echo "<option value = ".$row->ClassId.">". $class_row-> Name ."</option>";
+                    echo "<option value = ".$row->Id.">". $row-> Name ."</option>";
                 }
 
             }
@@ -121,7 +127,7 @@ if ($result = $mysqli->query("SELECT * FROM enroll WHERE UserId = '$id'"))
                 echo "</tbody>";
                 echo "<tr>";
                 echo "<td colspan='2'>";
-
+                echo "<input type='hidden' name='selectedClass' id='selectedClass' value='$classId'>";
                 echo "<button type='submit' class='btn btn-default'>Add Streaming URL</button>";
                 echo "</td>";
                 echo "</tr>";

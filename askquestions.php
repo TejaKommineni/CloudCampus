@@ -35,6 +35,9 @@ else
     $result = mysqli_query($mysqli, $query);
     if($result){
         $smsg = "Question Posted to the class.";
+        $class = $mysqli->query("select * from class where Id = '$classId'");
+        $class_row = $class->fetch_object();
+        $mysqli->query("update notifications set Questions = Questions +1 where UserId = '$class_row->Professor '");
     }else{
         $fmsg = "Failure while posting the question.";
     }

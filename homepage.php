@@ -37,22 +37,27 @@ include('session.php');
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
 	  <li><a href="#">Customer Profile</a></li>
-	  <li><a href="viewgiftcard.php">Enroll Class</a></li>
-      <li><a href="viewaccount.php">View Enrolled Classes</a></li>
-      <li><a href="askquestions.php">Ask Questions</a></li>
-      <li><a href="answerquestions.php">Answer Questions</a></li>
+
+
+
+
+
       <?php
-        if($login_session != 'Professor')
+        if($login_role == 'Professor')
         {
             echo "<li><a href=\"creategiftcard.php\">Add Videos</a></li>";
+            echo "<li><a href=\"answerquestions.php\">Answer Questions</a></li>";
         }
+      if($login_role == 'Student')
+      {
+          echo " <li><a href=\"viewgiftcard.php\">Enroll Class</a></li>";
+          echo "<li><a href=\"viewaccount.php\">View Enrolled Classes</a></li>";
+          echo "<li><a href=\"askquestions.php\">Ask Questions</a></li>";
+      }
       ?>
 
-          <li class="dropdown"><a href="#"><span class="glyphicon glyphicon-bell"></span> Notifications</a>
-          <li>
-
-
-      </ul>
+	  <li><a href="#">Notifications</a></li>
+	</ul>
 	<ul class="nav navbar-nav navbar-right">
       <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
     </ul>
