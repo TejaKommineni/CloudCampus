@@ -16,7 +16,11 @@
     </style>
 </head>
 <body>
-
+<script>
+    function closeModal(){
+        document.getElementsByClassName('modal')[0].classList.remove('show');
+    }
+</script>
 
 
 <?php
@@ -74,7 +78,7 @@ if ($result = $mysqli->query("SELECT * FROM class WHERE Professor  = '$id'"))
         echo "</br>";
         echo "<form method='post' action='addvideos.php' id=\"viewEnrolledClassForm\">";
         echo " <div class='form-group'>";
-        echo "<label for='enrolledclass'>Select a Class</label>";
+        echo "<label for='enrolledclass' class='list-classes-txt'>Select a Class to add video</label>";
         echo "<div class=\"form-group\" name=\"classId\" id=\"classId\" class=\"form-control\" required>";
         echo "<select id='selectedClass', name='selectedClass', class=\"form-control\">";
         while ($row = $result->fetch_object()) {
@@ -198,7 +202,6 @@ $mysqli->close();
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Confirmation</h4>
                 </div>
                 <div class="modal-body">

@@ -48,7 +48,7 @@ if ($result = $mysqli->query("SELECT * FROM enroll WHERE UserId = '$id'"))
         echo "</br>";
         echo "<form method='post' action='viewenrolledclasses.php' id=\"viewEnrolledClassForm\">";
         echo " <div class='form-group'>";
-        echo "<label for='enrolledclass'>Select an Enrolled Class</label>";
+        echo "<label for='enrolledclass' class='list-classes-txt'>Select an Enrolled Class</label>";
         echo "<div class=\"form-group\" name=\"classId\" id=\"classId\" class=\"form-control\" required>";
         echo "<select id='selectedClass', name='selectedClass', class=\"form-control\">";
         while ($row = $result->fetch_object()) {

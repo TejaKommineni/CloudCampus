@@ -136,7 +136,7 @@ if ($result = $mysqli->query("SELECT * FROM enroll WHERE UserId = '$id'"))
                 echo "</div>";
                 echo "<input type='hidden' name='selectedClass' id='selectedClass' value='$classId'>";
                 echo "<input type='hidden' name='userId' id='userId' value='$id'>";
-                echo "<button type='submit' class='btn btn-default'>Post Question</button>";
+                echo "<button type='submit' class='btn btn-info'>Post Question</button>";
                 echo "</form>";
 
             }
