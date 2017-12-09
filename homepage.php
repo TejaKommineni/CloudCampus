@@ -45,13 +45,13 @@ include('session.php');
       <?php
         if($login_role == 'Professor')
         {
-            echo "<li><a href=\"creategiftcard.php\">Add Videos</a></li>";
+            echo "<li><a href=\"addvideos.php\">Add Videos</a></li>";
             echo "<li><a href=\"answerquestions.php\">Answer Questions</a></li>";
         }
       if($login_role == 'Student')
       {
-          echo " <li><a href=\"viewgiftcard.php\">Enroll Class</a></li>";
-          echo "<li><a href=\"viewaccount.php\">View Enrolled Classes</a></li>";
+          echo " <li><a href=\"enrollclass.php\">Enroll Class</a></li>";
+          echo "<li><a href=\"viewenrolledclasses.php\">View Enrolled Classes</a></li>";
           echo "<li><a href=\"askquestions.php\">Ask Questions</a></li>";
       }
       ?>

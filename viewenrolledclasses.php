@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
-    <title>Ask Questions</title>
+    <title>Enrolled Classes</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -23,27 +23,6 @@
 // connect to the database
 include_once('homepage.php');
 require_once('connect-db.php');
-if (empty($_POST['question'])) {
-
-}
-else
-{
-    $question = $_POST['question'];
-    $userid = $_POST['userId'];
-    $classId = $_POST['selectedClass'];
-    $query = "INSERT INTO questions(Question, UserId, ClassId) VALUES ('$question','$userid','$classId')";
-    $result = mysqli_query($mysqli, $query);
-    if($result){
-        $smsg = "Question Posted to the class.";
-        $class = $mysqli->query("select * from class where Id = '$classId'");
-        $class_row = $class->fetch_object();
-        $mysqli->query("update notifications set Questions = Questions +1 where UserId = '$class_row->Professor '");
-    }else{
-        $fmsg = "Failure while posting the question.";
-    }
-
-
-}
 if ($res = $mysqli->query("select * from login where Username='$login_session'")){
     $row1 = $res->fetch_object();
     $id = $row1->Id;
@@ -67,9 +46,9 @@ if ($result = $mysqli->query("SELECT * FROM enroll WHERE UserId = '$id'"))
         _END;*/
 
         echo "</br>";
-        echo "<form method='post' action='askquestions.php' id=\"viewEnrolledClassForm\">";
+        echo "<form method='post' action='viewenrolledclasses.php' id=\"viewEnrolledClassForm\">";
         echo " <div class='form-group'>";
-        echo "<label for='enrolledclass'>Post Questions for an Enrolled Class</label>";
+        echo "<label for='enrolledclass'>Select an Enrolled Class</label>";
         echo "<div class=\"form-group\" name=\"classId\" id=\"classId\" class=\"form-control\" required>";
         echo "<select id='selectedClass', name='selectedClass', class=\"form-control\">";
         while ($row = $result->fetch_object()) {
@@ -102,42 +81,29 @@ if ($result = $mysqli->query("SELECT * FROM enroll WHERE UserId = '$id'"))
 
         }
         else {
+            echo "<table class='table table-striped table-hover'>";
+            echo "<tbody>";
+            echo "<tr><th>Topic</th><th>URL</th></tr>";
             $classId = $_POST['selectedClass'];
-            $questions = $mysqli->query("select * from questions where UserId ='$id' and ClassId='$classId'");
-            if ($questions->num_rows > 0) {
-                while ($question_row = $questions->fetch_object()) {
+            $videos = $mysqli->query("select * from videos where ClassId='$classId'");
+            if ($videos->num_rows > 0) {
+                while ($video_row = $videos->fetch_object()) {
 
-                    echo "<div class=\"form-group\">";
-                    echo "<label for=\"question\">Question:</label>";
-                    echo "<textarea class=\"form-control\" rows=\"3\" id=\"question\" disabled>". $question_row->Question ."</textarea>";
-                    echo "<label for=\"answer\">Answer:</label>";
-                    echo "<textarea class=\"form-control\" rows=\"3\" id=\"answer\" disabled>". $question_row->Answer ."</textarea>";
-                    echo "</div>";
-
+                    echo "<tr>";
+                    echo "<td>" . $video_row->Topic . "</td>";
+                    echo "<td>" . $video_row->Links . "</td>";
+                    echo "</td>";
+                    echo "</tr>";
                 }
-
-                echo "<form method='post' action='askquestions.php' id=\"askQuestionForm\">";
-                echo "<div class=\"form-group\">";
-                echo "<label for=\"question\">Question:</label>";
-                echo "<textarea class=\"form-control\" rows=\"3\" name='question' id=\"question\" placeholder='Ask a question' required></textarea>";
+                echo "</tbody>";
+                echo "</table>";
+                echo "</br></br>";
                 echo "</div>";
-                echo "<input type='hidden' name='selectedClass' id='selectedClass' value='$classId'>";
-                echo "<input type='hidden' name='userId' id='userId' value='$id'>";
-                echo "<button type='submit' class='btn btn-default'>Post Question</button>";
-                echo "</form>";
-
+                echo "</div>";
+                echo "</div>";
             }
             else
             {
-                echo "<form method='post' action='askquestions.php' id=\"askQuestionForm\">";
-                echo "<div class=\"form-group\">";
-                echo "<label for=\"question\">Question:</label>";
-                echo "<textarea class=\"form-control\" rows=\"3\" name='question' id=\"question\" placeholder='Ask a question' required></textarea>";
-                echo "</div>";
-                echo "<input type='hidden' name='selectedClass' id='selectedClass' value='$classId'>";
-                echo "<input type='hidden' name='userId' id='userId' value='$id'>";
-                echo "<button type='submit' class='btn btn-default'>Post Question</button>";
-                echo "</form>";
 
             }
         }
