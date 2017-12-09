@@ -37,9 +37,15 @@ include('session.php');
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
 	  <li><a href="#">Customer Profile</a></li>
-	  <li><a href="viewaccount.php">Enroll Class</a></li>
-      <li><a href="viewgiftcard.php">Gift Cards</a></li>
-	  <li><a href="editmiles.php">Edit Miles</a></li>
+	  <li><a href="viewgiftcard.php">Enroll Class</a></li>
+      <li><a href="viewaccount.php">View Enrolled Classes</a></li>
+      <?php
+        if($login_session != 'Professor')
+        {
+            echo "<li><a href=\"creategiftcard.php\">Add Videos</a></li>";
+        }
+      ?>
+
 	  <li><a href="redeem.php">Redeem</a></li>
 	</ul>
 	<ul class="nav navbar-nav navbar-right">
