@@ -94,9 +94,9 @@ echo "<div class='col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4'>"
 </br>
 _END;*/
 
-echo "<h3><b><center>List of Classes for Enrollment</center></b></h3>";
+echo "<h3><b><center class='list-classes-txt'>List of Classes for Enrollment</center></b></h3>";
 echo "</br>";
-echo "<table class='table table-striped table-hover'>";
+echo "<table class='table table-striped table-hover' id='view-classes-table'>";
 
 echo "<tbody>";
 echo "<tr><th>Class Code</th><th>Class Name</th><th>Class Description</th><th>Professor</th><th>Enroll</th><th>Drop</th></tr>";

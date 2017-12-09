@@ -72,7 +72,7 @@ if ($result = $mysqli->query("SELECT * FROM enroll WHERE UserId = '$id'"))
         echo "</select>";
         echo "</div>";
         echo "</div>";
-        echo "<button type='submit' class='btn btn-default'>Submit</button>";
+        echo "<button type='submit' class='btn btn-primary'>Watch Videos</button>";
         echo "</form>";
         echo "</br>";
 
@@ -81,7 +81,7 @@ if ($result = $mysqli->query("SELECT * FROM enroll WHERE UserId = '$id'"))
 
         }
         else {
-            echo "<table class='table table-striped table-hover'>";
+            echo "<table class='table table-striped table-hover' id='view-classes-table'>";
             echo "<tbody>";
             echo "<tr><th>Topic</th><th>URL</th></tr>";
             $classId = $_POST['selectedClass'];
@@ -91,7 +91,7 @@ if ($result = $mysqli->query("SELECT * FROM enroll WHERE UserId = '$id'"))
 
                     echo "<tr>";
                     echo "<td>" . $video_row->Topic . "</td>";
-                    echo "<td>" . $video_row->Links . "</td>";
+                    echo "<td><a style='cursor: pointer;'>" . $video_row->Links . "</a></td>";
                     echo "</td>";
                     echo "</tr>";
                 }

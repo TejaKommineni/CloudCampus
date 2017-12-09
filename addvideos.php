@@ -96,7 +96,7 @@ if ($result = $mysqli->query("SELECT * FROM class WHERE Professor  = '$id'"))
         echo "</select>";
         echo "</div>";
         echo "</div>";
-        echo "<button type='submit' class='btn btn-default'>Submit</button>";
+        echo "<button type='submit' class='btn btn-primary'>Submit</button>";
         echo "</form>";
         echo "</br>";
 
@@ -104,7 +104,7 @@ if ($result = $mysqli->query("SELECT * FROM class WHERE Professor  = '$id'"))
 
         }
         else {
-            echo "<table class='table table-striped table-hover'>";
+            echo "<table class='table table-striped table-hover' id='list-topics'>";
             echo "<tbody>";
             echo "<tr><th>Topic</th><th>URL</th></tr>";
             $classId = $_POST['selectedClass'];
@@ -113,7 +113,7 @@ if ($result = $mysqli->query("SELECT * FROM class WHERE Professor  = '$id'"))
                 while ($video_row = $videos->fetch_object()) {
                     echo "<tr>";
                     echo "<td>" . $video_row->Topic . "</td>";
-                    echo "<td>" . $video_row->Links . "</td>";
+                    echo "<td><a style='cursor: pointer;'>" . $video_row->Links . "</a></td>";
                     echo "</td>";
                     echo "</tr>";
                 }
@@ -128,7 +128,7 @@ if ($result = $mysqli->query("SELECT * FROM class WHERE Professor  = '$id'"))
                 echo "<tr>";
                 echo "<td colspan='2'>";
                 echo "<input type='hidden' name='selectedClass' id='selectedClass' value='$classId'>";
-                echo "<button type='submit' class='btn btn-default'>Add Streaming URL</button>";
+                echo "<button type='submit' class='btn btn-info'>Add Streaming URL</button>";
                 echo "</td>";
                 echo "</tr>";
                 echo "</form>";
@@ -152,7 +152,7 @@ if ($result = $mysqli->query("SELECT * FROM class WHERE Professor  = '$id'"))
                 echo "<tr>";
                 echo "<td colspan='2'>";
                 echo "<input type='hidden' name='selectedClass' id='selectedClass' value='$classId'>";
-                echo "<button type='submit' class='btn btn-default'>Add Streaming URL</button>";
+                echo "<button type='submit' class='btn btn-info'>Add Streaming URL</button>";
                 echo "</td>";
                 echo "</tr>";
                 echo "</form>";

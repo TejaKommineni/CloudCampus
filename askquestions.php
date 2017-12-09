@@ -69,7 +69,7 @@ if ($result = $mysqli->query("SELECT * FROM enroll WHERE UserId = '$id'"))
         echo "</br>";
         echo "<form method='post' action='askquestions.php' id=\"viewEnrolledClassForm\">";
         echo " <div class='form-group'>";
-        echo "<label for='enrolledclass'>Post Questions for an Enrolled Class</label>";
+        echo "<label for='enrolledclass' class='list-classes-txt'>Post Questions for an Enrolled Class</label>";
         echo "<div class=\"form-group\" name=\"classId\" id=\"classId\" class=\"form-control\" required>";
         echo "<select id='selectedClass', name='selectedClass', class=\"form-control\">";
         while ($row = $result->fetch_object()) {
@@ -93,7 +93,7 @@ if ($result = $mysqli->query("SELECT * FROM enroll WHERE UserId = '$id'"))
         echo "</select>";
         echo "</div>";
         echo "</div>";
-        echo "<button type='submit' class='btn btn-default'>Submit</button>";
+        echo "<button type='submit' class='btn btn-primary'>Submit</button>";
         echo "</form>";
         echo "</br>";
 
@@ -123,7 +123,7 @@ if ($result = $mysqli->query("SELECT * FROM enroll WHERE UserId = '$id'"))
                 echo "</div>";
                 echo "<input type='hidden' name='selectedClass' id='selectedClass' value='$classId'>";
                 echo "<input type='hidden' name='userId' id='userId' value='$id'>";
-                echo "<button type='submit' class='btn btn-default'>Post Question</button>";
+                echo "<button type='submit' class='btn btn-info'>Post Question</button>";
                 echo "</form>";
 
             }
