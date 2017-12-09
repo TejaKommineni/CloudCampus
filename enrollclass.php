@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
-<title>Gift Card</title>
+<title>Enroll Class</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -111,7 +111,7 @@ echo "<td>" . $row->Description . "</td>";
 echo "<td>" . $prof_row->Name . "</td>";
 echo "<td>";
 echo <<<_END
-<form method='post' action='viewgiftcard.php' id="form1">
+<form method='post' action='enrollclass.php' id="form1">
 <input type='hidden' name='id' value='$id'>
 <input type='hidden' name='classid' value='$row->Id'>
 <input type='hidden' name='type' value='enroll'>
@@ -121,7 +121,7 @@ _END;
 echo "</td>";
 echo "<td>";
 echo <<<_END
-<form method='post' action='viewgiftcard.php' id="form1">
+<form method='post' action='enrollclass.php' id="form1">
 <input type='hidden' name='id' value='$id'>
 <input type='hidden' name='classid' value='$row->Id'>
 <input type='hidden' name='type' value='drop'>

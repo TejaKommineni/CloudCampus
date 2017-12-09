@@ -4,7 +4,7 @@
 $server = 'localhost';
 $user = 'root';
 $pass = '';
-$db = 'rewards';
+$db = 'cloudcampus';
 
 // connect to the database
 $mysqli = new mysqli($server, $user, $pass, $db);

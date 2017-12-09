@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
-    <title>Gift Card</title>
+    <title>Add Videos</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -72,7 +72,7 @@ if ($result = $mysqli->query("SELECT * FROM class WHERE Professor  = '$id'"))
         _END;*/
 
         echo "</br>";
-        echo "<form method='post' action='creategiftcard.php' id=\"viewEnrolledClassForm\">";
+        echo "<form method='post' action='addvideos.php' id=\"viewEnrolledClassForm\">";
         echo " <div class='form-group'>";
         echo "<label for='enrolledclass'>Select a Class</label>";
         echo "<div class=\"form-group\" name=\"classId\" id=\"classId\" class=\"form-control\" required>";
@@ -118,7 +118,7 @@ if ($result = $mysqli->query("SELECT * FROM class WHERE Professor  = '$id'"))
                     echo "</tr>";
                 }
                 echo "<tr>";
-                echo "<form method='post' action='creategiftcard.php' id=\"viewEnrolledClassForm\">";
+                echo "<form method='post' action='addvideos.php' id=\"viewEnrolledClassForm\">";
                 echo " <div class='form-group'>";
                 echo "<td> <input type=\"text\" name=\"topic\" id=\"topic\" tabindex=\"1\" class=\"form-control\" placeholder=\"Add Topic\" value=\"\" required></td>";
                 echo "<td> <input type=\"text\" name=\"url\" id=\"url\" tabindex=\"1\" class=\"form-control\" placeholder=\"Add URL\" value=\"\" required></td>";
@@ -142,7 +142,7 @@ if ($result = $mysqli->query("SELECT * FROM class WHERE Professor  = '$id'"))
             {
 
                 echo "<tr>";
-                echo "<form method='post' action='creategiftcard.php' id=\"viewEnrolledClassForm\">";
+                echo "<form method='post' action='addvideos.php' id=\"viewEnrolledClassForm\">";
                 echo " <div class='form-group'>";
                 echo "<td> <input type=\"text\" name=\"topic\" id=\"topic\" tabindex=\"1\" class=\"form-control\" placeholder=\"Add Topic\" value=\"\" required></td>";
                 echo "<td> <input type=\"text\" name=\"url\" id=\"url\" tabindex=\"1\" class=\"form-control\" placeholder=\"Add URL\" value=\"\" required></td>";

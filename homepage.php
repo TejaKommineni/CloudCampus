@@ -32,15 +32,31 @@ include('session.php');
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="homepage.php">Air Asia</a>
+      <a class="navbar-brand" href="homepage.php">Cloud Campus</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
 	  <li><a href="#">Customer Profile</a></li>
-	  <li><a href="viewaccount.php">Rewards Account</a></li>
-      <li><a href="viewgiftcard.php">Gift Cards</a></li>
-	  <li><a href="editmiles.php">Edit Miles</a></li>
-	  <li><a href="redeem.php">Redeem</a></li>
+
+
+
+
+
+      <?php
+        if($login_role == 'Professor')
+        {
+            echo "<li><a href=\"addvideos.php\">Add Videos</a></li>";
+            echo "<li><a href=\"answerquestions.php\">Answer Questions</a></li>";
+        }
+      if($login_role == 'Student')
+      {
+          echo " <li><a href=\"enrollclass.php\">Enroll Class</a></li>";
+          echo "<li><a href=\"viewenrolledclasses.php\">View Enrolled Classes</a></li>";
+          echo "<li><a href=\"askquestions.php\">Ask Questions</a></li>";
+      }
+      ?>
+
+	  <li><a href="#">Notifications</a></li>
 	</ul>
 	<ul class="nav navbar-nav navbar-right">
       <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>

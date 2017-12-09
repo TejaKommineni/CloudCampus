@@ -19,9 +19,9 @@ $password = stripslashes($password);
 $username = mysqli_real_escape_string($mysqli,$username);
 $password = mysqli_real_escape_string($mysqli,$password);
 // Selecting Database
-$db = mysqli_select_db($mysqli,"rewards");
+$db = mysqli_select_db($mysqli,"cloudcampus");
 // SQL query to fetch information of registerd users and finds user match.
-$query = mysqli_query($mysqli,"select * from userlogin where password='$password' AND username='$username'");
+$query = mysqli_query($mysqli,"select * from login where Password='$password' AND Username='$username'");
 $rows = mysqli_num_rows($query);
 if ($rows == 1) {
 $_SESSION['login_user']=$username; // Initializing Session
@@ -44,16 +44,24 @@ header("location: homepage.php");
     // If the values are posted, insert them into the database.
 	if (isset($_POST['register-submit'])){
     if (isset($_POST['username']) && isset($_POST['password'])){
+        $name = $_POST['name'];
         $username = $_POST['username'];
 		$email = $_POST['email'];
         $password = $_POST['password'];
- 
-        $query = "INSERT INTO userlogin(username, password, email) VALUES ('$username', '$password', '$email')";
+        $role = $_POST['role'];
+        $query = "INSERT INTO login(Name, Username, Password, Email, Role) VALUES ('$name','$username', '$password', '$email', '$role')";
         $result = mysqli_query($mysqli, $query);
+        echo '<script language="javascript">';
+        echo 'alert($result)';
+        echo '</script>';
         if($result){
             $smsg = "User Created Successfully.";
+            $user = $mysqli->query("select * from login where Email='$email'");
+            $user_row = $user->fetch_object();
+            $query = "INSERT INTO notifications(UserId) VALUES ('$user_row->Id' )";
+            $result = mysqli_query($mysqli, $query);
         }else{
-            $fmsg ="Username or Email Id already taken. User Registration Failed";
+            $fmsg = "Username or Email Id already taken. User Registration Failed";
         }
     }
 	}
@@ -61,7 +69,7 @@ header("location: homepage.php");
 
 <html>
 <head>
-<title>Air Asia</title>
+<title>Cloud Campus</title>
 <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -154,7 +162,9 @@ header("location: homepage.php");
 
 								</form>
 								<form name="signupform" id="register-form" role="form" action="login.php" method="post" onsubmit="return validatesignupform()" style="display: none;">
-
+                                    <div class="form-group">
+                                        <input type="text" name="name" id="name" tabindex="1" class="form-control" placeholder="Enter Your Name" value="" required>
+                                    </div>
 									<div class="form-group">
 										<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="" required>
 									</div>
@@ -164,6 +174,12 @@ header("location: homepage.php");
 									<div class="form-group">
 										<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password" required>
 									</div>
+                                    <div class="form-group"  class="form-control" required>
+                                        <select class="form-control" name="role" id="role">
+                                            <option>Student</option>
+                                            <option>Professor</option>
+                                        </select>
+                                    </div>
 									<div class="form-group">
 										<div class="row">
 											<div class="col-sm-6 col-sm-offset-3">

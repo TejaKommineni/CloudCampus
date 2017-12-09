@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
-    <title>Gift Card</title>
+    <title>Enrolled Classes</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -46,7 +46,7 @@ if ($result = $mysqli->query("SELECT * FROM enroll WHERE UserId = '$id'"))
         _END;*/
 
         echo "</br>";
-        echo "<form method='post' action='viewaccount.php' id=\"viewEnrolledClassForm\">";
+        echo "<form method='post' action='viewenrolledclasses.php' id=\"viewEnrolledClassForm\">";
         echo " <div class='form-group'>";
         echo "<label for='enrolledclass'>Select an Enrolled Class</label>";
         echo "<div class=\"form-group\" name=\"classId\" id=\"classId\" class=\"form-control\" required>";
