@@ -44,11 +44,12 @@ header("location: homepage.php");
     // If the values are posted, insert them into the database.
 	if (isset($_POST['register-submit'])){
     if (isset($_POST['username']) && isset($_POST['password'])){
+        $name = $_POST['name'];
         $username = $_POST['username'];
 		$email = $_POST['email'];
         $password = $_POST['password'];
         $role = $_POST['role'];
-        $query = "INSERT INTO login(Username, Password, Email, Role) VALUES ('$username', '$password', '$email', '$role')";
+        $query = "INSERT INTO login(Name, Username, Password, Email, Role) VALUES ('$name','$username', '$password', '$email', '$role')";
         $result = mysqli_query($mysqli, $query);
         echo '<script language="javascript">';
         echo 'alert($result)';
@@ -157,7 +158,9 @@ header("location: homepage.php");
 
 								</form>
 								<form name="signupform" id="register-form" role="form" action="login.php" method="post" onsubmit="return validatesignupform()" style="display: none;">
-
+                                    <div class="form-group">
+                                        <input type="text" name="name" id="name" tabindex="1" class="form-control" placeholder="Enter Your Name" value="" required>
+                                    </div>
 									<div class="form-group">
 										<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="" required>
 									</div>

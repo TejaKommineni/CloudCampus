@@ -37,7 +37,7 @@ include('session.php');
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
 	  <li><a href="#">Customer Profile</a></li>
-	  <li><a href="viewaccount.php">Rewards Account</a></li>
+	  <li><a href="viewaccount.php">Enroll Class</a></li>
       <li><a href="viewgiftcard.php">Gift Cards</a></li>
 	  <li><a href="editmiles.php">Edit Miles</a></li>
 	  <li><a href="redeem.php">Redeem</a></li>

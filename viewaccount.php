@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
-<title>Reward Account</title>
+<title>Enroll Classes</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -23,9 +23,9 @@
 // connect to the database
 include_once('homepage.php');
 require_once('connect-db.php');
-if ($res = $mysqli->query("select * from userlogin where username='$login_session'")){
+if ($res = $mysqli->query("select * from login where Username='$login_session'")){
 $row1 = $res->fetch_object();
-	$id = $row1->id;
+	$id = $row1->Id;
 
 }
 // get the records from the database
