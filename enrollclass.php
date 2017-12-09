@@ -16,7 +16,11 @@
   </style>
 </head>
 <body>
-
+<script>
+    function closeModal(){
+        document.getElementsByClassName('modal')[0].classList.remove('show');
+    }
+</script>
 
 
 <?php
