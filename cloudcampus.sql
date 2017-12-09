@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Dec 09, 2017 at 05:19 PM
+-- Generation Time: Dec 09, 2017 at 06:57 PM
 -- Server version: 5.7.19
 -- PHP Version: 5.6.31
 
@@ -72,7 +72,6 @@ CREATE TABLE IF NOT EXISTS `enroll` (
 --
 
 INSERT INTO `enroll` (`Id`, `UserId`, `ClassId`) VALUES
-(35, 9, 1),
 (36, 9, 3),
 (37, 9, 4),
 (39, 9, 5);
@@ -101,7 +100,7 @@ CREATE TABLE IF NOT EXISTS `login` (
 --
 
 INSERT INTO `login` (`Id`, `Username`, `Password`, `Email`, `Role`, `Name`) VALUES
-(9, 'Teja', 'teja', 'teja.kommineni1@gmail.com', 'Student', 'Teja'),
+(9, 'Teja', 'teja12', 'teja.kommineni1@gmail.com', 'Student', 'Teja'),
 (10, 'Vathsala', 'vatsed', 'vathsala.ragireddy@gmail.com', 'Student', 'Vathsala'),
 (11, 'Rob', 'robrob', 'rob@rob.edu', 'Professor', 'Robert Ricci'),
 (12, 'Kobus', 'kobus', 'kobus@cs.edu', 'Professor', 'Kobus');
@@ -129,8 +128,8 @@ CREATE TABLE IF NOT EXISTS `notifications` (
 
 INSERT INTO `notifications` (`Id`, `UserId`, `Videos`, `Questions`, `Answers`) VALUES
 (4, 10, 0, 0, 0),
-(3, 9, 3, 0, 0),
-(5, 11, 0, 2, 2),
+(3, 9, 0, 0, 0),
+(5, 11, 0, 0, 0),
 (6, 12, 0, 0, 0),
 (7, 13, 0, 0, 0);
 
@@ -149,7 +148,7 @@ CREATE TABLE IF NOT EXISTS `questions` (
   `ClassId` int(5) NOT NULL,
   PRIMARY KEY (`Id`),
   UNIQUE KEY `Question` (`Question`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `questions`
@@ -157,7 +156,12 @@ CREATE TABLE IF NOT EXISTS `questions` (
 
 INSERT INTO `questions` (`Id`, `Question`, `UserId`, `Answer`, `ClassId`) VALUES
 (11, 'Dear Professor,\r\nWhat are the suggested books for this course ?\r\nThanks,\r\nTeja', 9, 'The research papers discussed in the class along with my slides should be enough. There are few other materials posted on my website.', 4),
-(12, 'Hi, \r\nWhat is the syllabus for mid term ?', 9, 'It should be what we covered in the class till tuesday.', 5);
+(12, 'Hi, \r\nWhat is the syllabus for mid term ?', 9, 'It should be what we covered in the class till tuesday.', 5),
+(13, 'asdasd', 9, 'dqw', 3),
+(14, 'edaina', 9, 'answer', 3),
+(15, 'post', 9, 'answeerfwed', 3),
+(16, 'ask a question', 9, '', 4),
+(17, 'ask', 9, 'answer', 5);
 
 -- --------------------------------------------------------
 
@@ -173,7 +177,7 @@ CREATE TABLE IF NOT EXISTS `videos` (
   `Topic` varchar(20) NOT NULL,
   PRIMARY KEY (`Id`),
   KEY `ClassID_in_Class_Table` (`ClassId`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `videos`
@@ -182,7 +186,11 @@ CREATE TABLE IF NOT EXISTS `videos` (
 INSERT INTO `videos` (`Id`, `ClassId`, `Links`, `Topic`) VALUES
 (11, 5, 'consensus/raft.go', 'Consesus'),
 (12, 5, 'transactions/aries.go', 'Transactions'),
-(13, 3, 'tes url', 'test');
+(13, 3, 'tes url', 'test'),
+(14, 3, 'asdasdas', 'asdd'),
+(15, 3, 'tested', 'test'),
+(16, 3, 'test1', 'test1'),
+(17, 3, 'asdas', 'asas');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
