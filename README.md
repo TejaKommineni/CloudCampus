@@ -5,7 +5,7 @@ Flow:
 	Assume the class table is given in the system.
 
 2) SIGN UP two students and two professors.
-	Functionalities:
+	Functionalities
 	a) Password Restrictions
 	b) Email Restrictions
 	c) Role Choice.
